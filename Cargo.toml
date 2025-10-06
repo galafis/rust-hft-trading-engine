@@ -1,0 +1,37 @@
+[package]
+name = "rust-hft-trading-engine"
+version = "0.1.0"
+edition = "2021"
+authors = ["Gabriel Demetrios Lafis"]
+description = "High-Frequency Trading Engine with order matching, market data processing, and risk management"
+license = "MIT"
+repository = "https://github.com/gabriellafis/rust-hft-trading-engine"
+
+[dependencies]
+tokio = { version = "1.41", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.11", features = ["v4", "serde"] }
+thiserror = "2.0"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+dashmap = "6.1"
+crossbeam = "0.8"
+rust_decimal = { version = "1.36", features = ["serde-float"] }
+rust_decimal_macros = "1.36"
+async-trait = "0.1"
+futures = "0.3"
+
+[dev-dependencies]
+tokio-test = "0.4"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "order_matching"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
